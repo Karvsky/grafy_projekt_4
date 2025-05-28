@@ -50,8 +50,7 @@ def main():
         print("3. Find Hamilton cycle")
         print("4. Exit")
         
-        # normalize user menu input
-        choice = input("Your choice> ").strip().lower()
+        choice = input("Your choice> ")
         
         if choice == '1':
             operations.print_graph()

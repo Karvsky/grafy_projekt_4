@@ -23,7 +23,6 @@ def main():
         return
     
     if args.hamilton:
-        # validate integer >10
         while True:
             try:
                 nodes = int(input("nodes> "))
@@ -33,7 +32,6 @@ def main():
                     break
             except ValueError:
                 print("Invalid input. Please enter an integer.")
-        # validate saturation as 30 or 70
         while True:
             try:
                 saturation = int(input("saturation> "))
@@ -47,7 +45,6 @@ def main():
         graph = generator.generate_hamiltonian_graph(nodes, saturation)
         
     elif args.non_hamilton:
-        # validate integer for nodes
         while True:
             try:
                 nodes = int(input("nodes> "))

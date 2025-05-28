@@ -23,21 +23,37 @@ def main():
         return
     
     if args.hamilton:
-        nodes = int(input("nodes> "))
-        while nodes <= 10:
-            print("Number of nodes must be greater than 10")
-            nodes = int(input("nodes> "))
-        
-        saturation = int(input("saturation> "))
-        while saturation not in [30, 70]:
-            print("Saturation must be 30 or 70")
-            saturation = int(input("saturation> "))
+        # validate integer >10
+        while True:
+            try:
+                nodes = int(input("nodes> "))
+                if nodes <= 10:
+                    print("Number of nodes must be greater than 10")
+                else:
+                    break
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+        # validate saturation as 30 or 70
+        while True:
+            try:
+                saturation = int(input("saturation> "))
+                if saturation in [30, 70]:
+                    break
+                print("Saturation must be 30 or 70")
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
         
         generator = GraphGenerator()
         graph = generator.generate_hamiltonian_graph(nodes, saturation)
         
     elif args.non_hamilton:
-        nodes = int(input("nodes> "))
+        # validate integer for nodes
+        while True:
+            try:
+                nodes = int(input("nodes> "))
+                break
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
         generator = GraphGenerator()
         graph = generator.generate_non_hamiltonian_graph(nodes)
     

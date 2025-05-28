@@ -24,14 +24,14 @@ def main():
     
     if args.hamilton:
         nodes = int(input("nodes> "))
-        if nodes <= 10:
+        while nodes <= 10:
             print("Number of nodes must be greater than 10")
-            return
+            nodes = int(input("nodes> "))
         
         saturation = int(input("saturation> "))
-        if saturation not in [30, 70]:
+        while saturation not in [30, 70]:
             print("Saturation must be 30 or 70")
-            return
+            saturation = int(input("saturation> "))
         
         generator = GraphGenerator()
         graph = generator.generate_hamiltonian_graph(nodes, saturation)
@@ -50,7 +50,8 @@ def main():
         print("3. Find Hamilton cycle")
         print("4. Exit")
         
-        choice = input("Your choice> ")
+        # normalize user menu input
+        choice = input("Your choice> ").strip().lower()
         
         if choice == '1':
             operations.print_graph()

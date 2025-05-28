@@ -7,11 +7,21 @@ class GraphOperations:
     
     def print_graph(self):
         print("\nGraph representation (adjacency list):")
+        
+        max_vertex_width = max(len(str(v)) for v in self.graph.keys()) if self.graph else 1
+        max_neighbors_width = max(len(str(sorted(list(self.graph[v])))) for v in self.graph.keys()) if self.graph else 1
+        max_degree_width = max(len(str(len(self.graph[v]))) for v in self.graph.keys()) if self.graph else 1
+        
         for vertex in sorted(self.graph.keys()):
             neighbors = sorted(list(self.graph[vertex]))
             degree = len(neighbors)
             parity = "even" if degree % 2 == 0 else "odd"
-            print(f"{vertex}: {neighbors} (degree: {degree}, {parity})")
+            
+            vertex_str = str(vertex).ljust(max_vertex_width)
+            neighbors_str = str(neighbors).ljust(max_neighbors_width)
+            degree_str = str(degree).ljust(max_degree_width)
+            
+            print(f"{vertex_str}: {neighbors_str} (degree: {degree_str}, {parity})")
         
         edges = []
         for v in self.graph:
@@ -19,12 +29,11 @@ class GraphOperations:
                 if (neighbor, v) not in edges:
                     edges.append((v, neighbor))
         
-        print(f"\nTotal vertices: {len(self.graph)}")
+        print(f"\nTotal nodes: {len(self.graph)}")
         print(f"Total edges: {len(edges)}")
         
         odd_degree_count = sum(1 for v in self.graph if len(self.graph[v]) % 2 == 1)
-        print(f"Vertices with odd degree: {odd_degree_count}")
-        print(f"Euler cycle possible: {'Yes' if odd_degree_count == 0 else 'No'}")
+        print(f"Nodes with odd degree: {odd_degree_count}\n")
     
     def find_euler_cycle(self):
         if not self._has_euler_cycle():

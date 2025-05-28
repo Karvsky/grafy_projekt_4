@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-import sys
+import sys, os
 import argparse
 from graph_generator import GraphGenerator
 from graph_operations import GraphOperations
 from benchmark import Benchmark
+os.system('cls' if os.name=='nt' else 'clear')  
 
 def main():
     parser = argparse.ArgumentParser(description='Graph algorithms with backtracking')
@@ -48,41 +49,45 @@ def main():
         while True:
             try:
                 nodes = int(input("nodes> "))
-                break
+                if nodes > 1:
+                    break
+                print("Nodes must be above 1")
             except ValueError:
                 print("Invalid input. Please enter an integer.")
         generator = GraphGenerator()
         graph = generator.generate_non_hamiltonian_graph(nodes)
     
     operations = GraphOperations(graph)
-    
+    os.system('cls' if os.name=='nt' else 'clear')  
+
     while True:
-        print("\nChoose operation:")
+        print("Choose operation:")
         print("1. Print graph")
         print("2. Find Euler cycle")
         print("3. Find Hamilton cycle")
         print("4. Exit")
         
         choice = input("Your choice> ")
-        
+        os.system('cls' if os.name=='nt' else 'clear')  
+
         if choice == '1':
             operations.print_graph()
         elif choice == '2':
             euler_cycle = operations.find_euler_cycle()
             if euler_cycle:
-                print(f"Euler cycle: {' -> '.join(map(str, euler_cycle))}")
+                print(f"Euler cycle: {' -> '.join(map(str, euler_cycle))}\n")
             else:
-                print("No Euler cycle found")
+                print("No Euler cycle found\n")
         elif choice == '3':
             hamilton_cycle = operations.find_hamilton_cycle()
             if hamilton_cycle:
-                print(f"Hamilton cycle: {' -> '.join(map(str, hamilton_cycle))}")
+                print(f"Hamilton cycle: {' -> '.join(map(str, hamilton_cycle))}\n")
             else:
-                print("No Hamilton cycle found")
+                print("No Hamilton cycle found\n")
         elif choice == '4':
             break
         else:
-            print("Invalid choice")
+            print("Invalid choice\n")
 
 if __name__ == "__main__":
     main()

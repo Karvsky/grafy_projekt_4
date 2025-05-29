@@ -4,6 +4,8 @@ import argparse
 from graph_generator import GraphGenerator
 from graph_operations import GraphOperations
 from benchmark import Benchmark
+from graph_visualization import export_to_tikz
+
 os.system('cls' if os.name=='nt' else 'clear')  
 
 def main():
@@ -44,6 +46,8 @@ def main():
         
         generator = GraphGenerator()
         graph = generator.generate_hamiltonian_graph(nodes, saturation)
+        export_to_tikz(graph, filename="output_graph.tex")
+        print("TikZ saved to output_graph.tex")
         
     elif args.non_hamilton:
         while True:
@@ -56,6 +60,8 @@ def main():
                 print("Invalid input. Please enter an integer.")
         generator = GraphGenerator()
         graph = generator.generate_non_hamiltonian_graph(nodes)
+        export_to_tikz(graph, filename="output_graph.tex")
+        print("TikZ saved to output_graph.tex")
     
     operations = GraphOperations(graph)
     os.system('cls' if os.name=='nt' else 'clear')  
